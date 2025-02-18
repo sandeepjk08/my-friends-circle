@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const menuRoutes = require('./routes/menuRoutes');  // Import menu routes
 require('dotenv').config();
 
 const app = express();
@@ -13,6 +14,9 @@ mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
+
+// Routes
+app.use('/api/menu', menuRoutes);  // Use the menu routes
 
 // Sample Route
 app.get('/', (req, res) => {
